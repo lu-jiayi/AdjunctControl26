@@ -1,24 +1,36 @@
-var condition = _.sample(["list1", "list2", "list1_r", "list2_r"])
+var condition = _.sample(["list1", "list2", "list1_r", "list2_r"]) // sample function picks out one randomly
 
+var shuffle = function (array) {
+ 
+  var currentIndex = array.length;
+  var temporaryValue, randomIndex;
+  while (0 !== currentIndex) {
+    randomIndex = Math.floor(Math.random() * currentIndex);
+    currentIndex -= 1;
+    temporaryValue = array[currentIndex];
+    array[currentIndex] = array[randomIndex];
+    array[randomIndex] = temporaryValue;
+  }
+ 
+  return array;
+ 
+};
 
 var trial_counter = 0;
 
 function build_trials() {
-  if (condition == "list1") {
-    return list1;
+  var condition_list = [] //my addition through line 12
+  for (var i = 0; i < 12; i++) {
+    var random = _.sample([1,2,3,4])
+    condition_list.push(((i + 1)* 10) + random)
   }
-  
-  if (condition == "list2") {
-    return list2;
-  }
-  
-  if (condition == "list1_r") {
-    return list1.reverse();
-  }
-  
-  if (condition == "list2_r") {
-    return list2.reverse();
-  }
+  console.log(condition_list) // requires shuffling still
+  shuffle(condition_list)
+  console.log(condition_list)
+  const presentation_list = condition_list.map((integer) => full_stimuli.find((item) => item.condition_id === integer));
+  return presentation_list
+
+
 }
 
 
