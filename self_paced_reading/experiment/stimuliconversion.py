@@ -4,7 +4,7 @@ import re
 import os
  
 
-INPUT_FILE = input(PythonText1.xlsx)
+INPUT_FILE = input("StimuliSPR.xlsx")
  
 # Automatically generate output file name
 base_name = os.path.splitext(INPUT_FILE)[0]
