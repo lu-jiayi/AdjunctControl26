@@ -1,4 +1,4 @@
-full_stimuli = [
+[
   {
     "words": [
       {
@@ -5720,7 +5720,7 @@ full_stimuli = [
     "item": 1004,
     "condition_voice": "nan",
     "condition_pronoun": "nan",
-    "question_attribtute": "Was the ripe banana eaten by a gopher?",
+    "question_attribtute": "Was the ripe eaten by a gopher?",
     "correct_answer": "NO"
   },
   {
@@ -5939,7 +5939,7 @@ full_stimuli = [
     "item": 1008,
     "condition_voice": "nan",
     "condition_pronoun": "nan",
-    "question_attribtute": "Were the drums quiet?",
+    "question_attribtute": "Were the drums quite?",
     "correct_answer": "NO"
   },
   {

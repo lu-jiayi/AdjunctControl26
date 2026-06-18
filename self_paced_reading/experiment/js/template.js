@@ -24,10 +24,14 @@ function build_trials() {
     var random = _.sample([1,2,3,4])
     condition_list.push(((i + 1)* 10) + random)
   }
+  for (var i = 0; i < 24; i++) {
+    condition_list.push(1000 + i + 1)
+  }
   console.log(condition_list) // requires shuffling still
   shuffle(condition_list)
   console.log(condition_list)
-  const presentation_list = condition_list.map((integer) => full_stimuli.find((item) => item.condition_id === integer));
+  const condition_strings = condition_list.map(num => num.toString());
+  const presentation_list = condition_strings.map((integer) => full_stimuli.find((item) => item.trial_id === integer));
   return presentation_list
 
 
@@ -47,6 +51,18 @@ function make_slides(f) {
 
   slides.instructions = slide({
     name : "instructions",
+    button : function() {
+      exp.go(); //use exp.go() if and only if there is no "present" data.
+    }
+  });
+    slides.instructions2 = slide({
+    name : "instructions2",
+    button : function() {
+      exp.go(); //use exp.go() if and only if there is no "present" data.
+    }
+  });
+    slides.instructions3 = slide({
+    name : "instructions3",
     button : function() {
       exp.go(); //use exp.go() if and only if there is no "present" data.
     }
@@ -102,18 +118,19 @@ function make_slides(f) {
         }
         
       });
+console.log("stim:", stim);
+console.log("question:", stim.question_attribtute);
+console.log("question element exists:", $("#comprehension-question-q").length);
+
+$("#comprehension-question-q").text(stim.question_attribtute);
+      $("#comprehension-question-q").text(stim.question_attribute);
       
-      $("#comprehension-question-q").text(stim.question);
-      
-      
-      
-     
-     
-     
+  
 
     },
     button : function(response) {
-      this.response_correct = response == this.stim.correct_answer;
+        this.response_correct =
+           response.toUpperCase() == this.stim.correct_answer.toUpperCase();
       this.log_responses();
       _stream.apply(this);
     },
@@ -189,7 +206,7 @@ function init() {
       screenUW: exp.width
     };
   //blocks of the experiment:
-  exp.structure=["i0",  "instructions", "trial", 'subj_info', 'thanks'];
+  exp.structure=["i0",  "instructions", "instructions2", "instructions3", "trial", 'subj_info', 'thanks'];
 
   exp.data_trials = [];
   //make corresponding slides:
